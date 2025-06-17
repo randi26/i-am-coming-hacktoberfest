@@ -1,0 +1,33 @@
+name: Hitung Kontributor
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Hitung Jumlah Kontributor
+        id: hitung
+        run: |
+          JUMLAH=$(grep -c "^- " kontributor.md)
+          echo "JUMLAH=$JUMLAH" >> $GITHUB_ENV
+
+      - name: Ganti Placeholder di README
+        run: |
+          sed -i "s/{{jumlah_kontributor}}/${{ env.JUMLAH }}/g" README.md
+
+      - name: Commit dan Push Perubahan
+        run: |
+          git add README.md
+          git commit -m "🤖 update statistik kontributor (${{ env.JUMLAH }})"
+          git push
