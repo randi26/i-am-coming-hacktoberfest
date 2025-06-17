@@ -1,0 +1,20 @@
+name: Cek Kontributor
+
+on:
+  pull_request:
+    paths:
+      - 'kontributor.md'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Cek apakah file kontributor.md tidak kosong
+        run: |
+          if [[ ! -s "kontributor.md" ]]; then
+            echo "::error file=kontributor.md::File kosong!"
+            exit 1
+          fi
