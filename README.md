@@ -32,7 +32,7 @@ NamaKamu - asal ( negara aj )
 
 ## 📊 Statistik Kontributor (update otomatis)
 
-> Total kontributor: **`{{jumlah_kontributor}}`**
+> Total kontributor: **`1`**
 
 (Cek semua nama di file [`kontributor.md`](./kontributor.md))
 
